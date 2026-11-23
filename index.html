@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Next-Step Writing Feedback · for multilingual learners</title>
+  <meta name="description" content="Asset-based, teacher-reviewed writing feedback for multilingual learners, organized by the WIDA dimensions of language. Built with Claude.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%230f6e6e%27/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow">Teacher tool · v0.1 pilot</p>
+      <h1>Next-Step Writing Feedback</h1>
+      <p class="lede">Asset-based feedback on writing by multilingual learners, one proficiency level up, reviewed by the teacher before any student sees it.</p>
+      <p class="notice" role="note"><strong>Not an assessment.</strong> The tool never scores or assigns a level. Remove student names and identifiers before pasting text. <a href="https://github.com/noravieytes/writing-feedback-assistant/blob/main/docs/privacy.md">Privacy notes</a></p>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <section class="panel" aria-labelledby="input-title">
+      <h2 id="input-title">1. Student writing</h2>
+
+      <div class="samples" role="group" aria-label="Try a sample">
+        <span>Try a sample (no key needed):</span>
+        <div id="sample-buttons" class="sample-buttons"></div>
+      </div>
+
+      <form id="feedback-form" novalidate>
+        <div class="grid-2">
+          <label>Grade cluster
+            <select name="gradeCluster">
+              <option>Grades 4-5</option>
+              <option selected>Grades 6-8</option>
+              <option>Grades 9-12</option>
+            </select>
+          </label>
+          <label>WIDA writing level (teacher-reported)
+            <select name="level" required>
+              <option value="">Choose…</option>
+              <option value="1">1 · Entering</option>
+              <option value="2">2 · Emerging</option>
+              <option value="3">3 · Developing</option>
+              <option value="4">4 · Expanding</option>
+              <option value="5">5 · Bridging</option>
+              <option value="6">6 · Reaching</option>
+            </select>
+          </label>
+          <label>Key Language Use
+            <select name="languageUse" required>
+              <option value="">Choose…</option>
+              <option>Narrate</option>
+              <option>Inform</option>
+              <option>Explain</option>
+              <option>Argue</option>
+            </select>
+          </label>
+          <label>Focus dimension
+            <select name="focus">
+              <option value="">Let the tool choose</option>
+              <option value="discourse">Discourse (organization, cohesion)</option>
+              <option value="sentence">Sentence (grammatical complexity)</option>
+              <option value="word">Word (precision)</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Writing task given to the student <span class="opt">(optional)</span>
+          <input name="taskPrompt" type="text" placeholder="e.g., Explain one challenge the character faced.">
+        </label>
+
+        <label>Student writing
+          <textarea name="studentText" rows="8" required placeholder="Paste the student's text here, without names."></textarea>
+        </label>
+
+        <div class="grid-2">
+          <label>Student message also in <span class="opt">(optional)</span>
+            <input name="homeLanguage" type="text" list="languages" placeholder="e.g., Spanish">
+            <datalist id="languages">
+              <option>Spanish</option><option>Arabic</option><option>Portuguese</option>
+              <option>Haitian Creole</option><option>Dari</option><option>Pashto</option>
+              <option>Vietnamese</option><option>K'iche'</option>
+            </datalist>
+          </label>
+          <label>Teacher notes <span class="opt">(optional)</span>
+            <input name="teacherNotes" type="text" placeholder="e.g., We practiced claims this week.">
+          </label>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" name="confirmedNoIdentifiers">
+          I removed student names and other identifiers.
+        </label>
+
+        <details class="key-box">
+          <summary>Use your own Claude API key to analyze new writing</summary>
+          <p>The key stays in this browser tab only (session storage) and is sent only to Anthropic's API. Text is sent to Anthropic for processing; check your district's approval before using real student work. <a href="https://github.com/noravieytes/writing-feedback-assistant/blob/main/docs/privacy.md">Details</a></p>
+          <label>Anthropic API key
+            <input name="apiKey" type="password" autocomplete="off" placeholder="sk-ant-…">
+          </label>
+        </details>
+
+        <p id="form-errors" class="errors" role="alert" hidden></p>
+        <button type="submit" id="submit-btn">Get feedback</button>
+      </form>
+    </section>
+
+    <section class="panel results" aria-labelledby="results-title" aria-live="polite">
+      <h2 id="results-title">2. Feedback for review</h2>
+      <div id="results">
+        <p class="empty">Choose a sample above, or paste student writing and add an API key.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Built by <a href="https://github.com/noravieytes">Nora Vieytes</a>, ESOL teacher and researcher, with Claude (Anthropic). Organized around the three dimensions of language in the WIDA ELD Standards Framework (2020); not affiliated with or endorsed by WIDA. <a href="https://github.com/noravieytes/writing-feedback-assistant">Source code</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
